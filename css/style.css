@@ -118,7 +118,7 @@ body {
 }
 
 .section-one {
-  background: url(/image/laptop.webp) no-repeat;
+  background: url(image/laptop.webp) no-repeat;
   background-size: cover;
   -webkit-box-pack: end;
       -ms-flex-pack: end;
