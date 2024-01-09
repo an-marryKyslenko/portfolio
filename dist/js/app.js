@@ -402,7 +402,7 @@
         const range = document.createElement("div");
         range.classList.add("ranges__element");
         range.classList.add("range");
-        range.innerHTML = `\n\t\t\t<div class="range__contant">\n\t\t\t\t<h5 class="range__title">${elem.name}</h5>\n\t\t\t\t<p class="range__level">${elem.level}</p>\n\t\t\t\t<div class="range__line ${elem.level}"></div>\n\t\t\t</div>\n\t\t`;
+        range.innerHTML = `\n\t\t\t<div class="range__contant">\n\t\t\t\t<h4 class="range__title">${elem.name}</h4>\n\t\t\t\t<p class="range__level">${elem.level}</p>\n\t\t\t\t<div class="range__line ${elem.level}"></div>\n\t\t\t</div>\n\t\t`;
         techBlock.appendChild(range);
     }));
     const downloadButton = document.getElementById("downloadCV");

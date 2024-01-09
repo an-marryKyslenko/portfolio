@@ -8,7 +8,7 @@ if (!!techBlock) {
 		range.classList.add('range')
 		range.innerHTML = `
 			<div class="range__contant">
-				<h5 class="range__title">${elem.name}</h5>
+				<h4 class="range__title">${elem.name}</h4>
 				<p class="range__level">${elem.level}</p>
 				<div class="range__line ${elem.level}"></div>
 			</div>

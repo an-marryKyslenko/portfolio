@@ -2,30 +2,6 @@
 
 @charset "UTF-8";
 
-[class*=_icon-]:before {
-  font-family: "icons";
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-[class*=_icon-]:before {
-  display: block;
-}
-
-@font-face {
-  font-family: "icomoon";
-  src: url("fonts/icomoon.eot?dipn8b");
-  src: url("fonts/icomoon.eot?dipn8b#iefix") format("embedded-opentype"), url("fonts/icomoon.ttf?dipn8b") format("truetype"), url("fonts/icomoon.woff?dipn8b") format("woff"), url("fonts/icomoon.svg?dipn8b#icomoon") format("svg");
-  font-weight: normal;
-  font-style: normal;
-  font-display: block;
-}
-
 [class^=icon-],
 [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
