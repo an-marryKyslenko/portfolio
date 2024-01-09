@@ -1,4 +1,4 @@
- [class^="icon-"], [class*=" icon-"] {
+ [class^="icon-"]::before, [class*=" icon-"]::before {
 	/* use !important to prevent issues with browser extensions that change fonts */
 	font-family: 'icomoon' !important;
 	font-style: normal;
@@ -6,15 +6,13 @@
 	font-variant: normal;
 	text-transform: none;
 	line-height: 1;
- 
 	/* Better Font Rendering =========== */
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
- }
- [class^="icon-"]::before, [class*=" icon-"]::before {
 	display: inline-block;
 	padding: 0 5px;
  }
+
  
  .icon-gulp:before {
 	content: "\e904";
