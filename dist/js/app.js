@@ -381,7 +381,7 @@
     function cardHTML(elem) {
         let description = elem.description.slice(0, 100);
         let threeDots = elem.description.length > 100 ? "..." : "";
-        const cardHTML = `\n\t\t<div class="card__content">\n\t\t\t<div class="card__img-ibg">\n\t\t\t\t<img src=${elem.image} alt="project ${elem.id}"/>\n\t\t\t</div>\n\t\t\t<div class="card__status ${elem.status ? "_status" : ""}"> In process</div>\n\t\t\t<h4 class="card__name">${elem.name}</h4>\n\t\t\t<p class="card__description">${description}${threeDots}</p>\n\t\t\t<a href=${elem.link} class="card__button shiny-btn">Look it up</a>\n\t\t</div>\n\t`;
+        const cardHTML = `\n\t\t<div class="card__content">\n\t\t\t<div class="card__img-ibg">\n\t\t\t\t<img src=${elem.image} alt="project ${elem.id}"/>\n\t\t\t</div>\n\t\t\t<div class="card__status ${elem.status ? "_status" : ""}"> In process</div>\n\t\t\t<h3 class="card__name">${elem.name}</h3>\n\t\t\t<p class="card__description">${description}${threeDots}</p>\n\t\t\t<a href=${elem.link} class="card__button shiny-btn">Look it up</a>\n\t\t</div>\n\t`;
         return cardHTML;
     }
     function describeProject(elem) {

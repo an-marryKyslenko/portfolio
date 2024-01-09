@@ -67,7 +67,7 @@ function cardHTML(elem) {
 				<img src=${elem.image} alt="project ${elem.id}"/>
 			</div>
 			<div class="card__status ${elem.status ? '_status' : ''}"> In process</div>
-			<h4 class="card__name">${elem.name}</h4>
+			<h3 class="card__name">${elem.name}</h3>
 			<p class="card__description">${description}${threeDots}</p>
 			<a href=${elem.link} class="card__button shiny-btn">Look it up</a>
 		</div>
