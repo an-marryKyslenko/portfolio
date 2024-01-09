@@ -1,0 +1,226 @@
+.technologies {
+
+	&__contant {
+		margin: 60px 0;
+		position: relative;
+		&::before{
+			content: '';
+			width: 200px;
+			height: 300px;
+			top: -10%;
+			left: -20%;
+			border-radius: 407px;
+			background: #13ADC7;
+			filter: blur(182px);
+			position: absolute;
+		}
+		@media (max-width:$mobile){
+			margin: 30px 0;
+		}
+	}
+
+	&__ranges {
+		@include adaptiveValue('margin-bottom', 100, 40);
+		position: relative;
+		z-index: 2;
+	}
+	&__more{
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		row-gap: 30px;
+		margin: 0px 30px;
+	}
+	&__skill{
+		flex: 0 1 33.333%;
+		font-size: 26px;
+		list-style: disc;
+		@media (max-width:$mobile){
+			flex: 0 1 50%;
+			font-size: rem(18);
+		}
+		@media (max-width:$mobileSmall){
+			flex-basis: 100%;
+		}
+
+	}
+}
+.range {
+	margin-bottom: rem(20);
+
+	&__contant {
+		display: flex;
+		justify-content: space-between;
+		row-gap: 10px;
+		flex-wrap: wrap;
+	}
+
+	&__title {
+		flex: 0 1 50%;
+		font-size: 26px;
+		@media (max-width:$mobile){
+			font-size: rem(20);
+		}
+	}
+
+	&__level {
+		text-transform: uppercase;
+		flex: 0 1 50%;
+		text-align: right;
+
+	}
+	&__line{
+		flex: 1 1 100%;
+		height: 30px;
+		border-radius: 83px;
+		background: #162950;
+		position: relative;
+		
+		&::before{
+			content: '';
+			position: absolute;
+			height: 30px;
+			border-radius: 83px;
+			background: $mainGradient;
+			width: 0%;
+			transition: width 0.3s ease 0.4s;
+		}
+		
+		@media (max-width: $mobile){
+			height: 20px;
+			&:before{
+				height: 20px;
+			}
+		}
+	}
+	
+
+}
+
+.technologies__ranges._watcher-view{
+	
+		// .advanced::before{
+		// 	width: 75%;
+		// }
+		// .regular::before{
+		// 	width: 50%;
+		// }
+		// .beginner::before{
+		// 	width: 25%;
+		// }
+		.advanced::before{
+			animation: easeOutAdvanced 1.5s ease-in 1 normal running 0.2s ;
+			width: 75%;
+		}
+		.regular::before{
+			animation: easeOutRegular 1.5s ease-in 1 normal running 0.5s ;
+			width: 50%;
+
+		}
+		.beginner::before{
+			animation: easeOutBeginner 1.2s ease-in 1 normal running 0.7s ;
+			width: 25%;
+		}
+	
+
+}
+
+@keyframes easeOutAdvanced {
+	0% {
+		width: 0%;
+	}
+
+	16% {
+		width: 56%;
+	}
+
+	28% {
+		width: 70%;
+	}
+
+	44% {
+		width: 75%;
+	}
+
+	59% {
+		width: 90%;
+		opacity: 0.5;
+	}
+
+	88% {
+		width: 65%;
+		opacity: 0.6;
+	}
+
+	100% {
+	width: 75%;
+	opacity: 1;
+	}
+
+}
+@keyframes easeOutRegular {
+	0% {
+		width: 0%;
+	}
+
+	16% {
+		width: 26%;
+	}
+
+	28% {
+		width: 46%;
+	}
+
+	44% {
+		width: 60%;
+	}
+
+	59% {
+		width: 70%;
+		opacity: 0.5;
+	}
+
+	88% {
+		width: 45%;
+		opacity: 0.6;
+	}
+
+	100% {
+	width: 50%;
+	opacity: 1;
+	}
+
+}
+@keyframes easeOutBeginner {
+	0% {
+		width: 0%;
+	}
+
+	16% {
+		width: 36%;
+	}
+
+	28% {
+		width: 60%;
+	}
+
+	44% {
+		width: 15%;
+	}
+
+	59% {
+		width: 40%;
+		opacity: 0.5;
+	}
+
+	88% {
+		width: 15%;
+		opacity: 0.6;
+	}
+
+	100% {
+	width: 25%;
+	opacity: 1;
+	}
+
+}

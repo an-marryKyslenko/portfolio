@@ -1,0 +1,50 @@
+// Заголовки, загальні БЕМ блоки та інше...
+.hover-gradient{
+	background-image: linear-gradient(45deg, rgba(255,255,255,.0) 30%, rgba(255,255,255,.8), rgba(255,255,255,.0) 70%);
+		background-repeat: no-repeat;
+		background-size: 200% 100%, auto;
+		background-position: 200% 0, 0 0;
+		&:hover{
+			background-position: -200% 0, 0 0;
+			transition: 0.5s linear;
+		}
+}
+
+.title {
+	font-size: 34px;
+	font-weight: 600;
+	margin-bottom: 50px;
+	position: relative;
+	z-index: 1;
+	@media (max-width:$mobile){
+		font-size: rem(24);
+		margin-bottom: rem(30);
+	}
+}
+
+%gradientText{
+	background: $mainGradient;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+.shiny-btn{
+	position: relative;
+	overflow: hidden;
+	&:before {
+		position: absolute;
+		content: '';
+		display: inline-block;
+		top: -180px;
+		left: 0;
+		width: 30px;
+		height: 100%;
+		background-color: #fff;
+		animation: shiny-btn 3s ease-in-out infinite;
+	}
+}
+@keyframes shiny-btn{
+0% { -webkit-transform: scale(0) rotate(45deg); opacity: 0; }
+80% { -webkit-transform: scale(0) rotate(45deg); opacity: 0.5; }
+81% { -webkit-transform: scale(4) rotate(45deg); opacity: 1; }
+100% { -webkit-transform: scale(50) rotate(45deg); opacity: 0; }
+}

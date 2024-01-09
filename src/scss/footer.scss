@@ -1,0 +1,44 @@
+//====================================================================================================
+.footer {
+	background-color: #000;
+
+	&__contant {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 30px;
+		padding: 50px 0;
+		@media (max-width:$mobile){
+			align-items: start;
+		}
+	
+	}
+
+	&__column{
+		a{
+			transition: all 0.3s ease 0s;
+			font-weight: 600;
+		}
+		a:hover{
+			background:linear-gradient(270deg, #13ADC7 0%, #6978D1 66.67%, #945DD6 100%);
+			background-clip: text;
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+	}
+	&__column:not(:last-child) {
+		display: flex;
+		flex-direction: column;
+		gap:10px;
+	}
+	&__column:last-child{
+		display: flex;
+		gap:20px;
+		font-size: 30px;
+		
+	}
+}
+
+
+//====================================================================================================

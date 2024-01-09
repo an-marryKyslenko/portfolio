@@ -1,0 +1,302 @@
+.projects {
+	padding: 60px 0;
+
+
+	&__contant {
+		display: flex;
+		flex-direction: column;
+		position: relative;
+		
+		&::before{
+			content: '';
+			// width: 700px;
+		@include adaptiveValue("width", 700, 400);
+		@include adaptiveValue("height", 700, 400);
+			// height: 700px;
+			top: 10%;
+			right: -60%;
+			border-radius: 777px;
+			background: #945DD6;
+			filter: blur(282px);
+			position: absolute;
+		}
+	}
+
+	&__cards {
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		@include adaptiveValue('row-gap', 60, 30);
+		margin-bottom: 60px;
+		@media (max-width: 790px) {
+			justify-content: center;
+		}
+	}
+	&__more{
+		align-self: flex-end;
+		position: relative;
+		border-radius: 5px;
+		padding: 10px 25px;
+		background: transparent;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+		7px 7px 20px 0px rgba(0,0,0,.1),
+		4px 4px 5px 0px rgba(0,0,0,.1);
+		transition: all 0.3s ease;
+		overflow: hidden;
+		span{
+			position: relative;
+			z-index: 2;
+		}
+	
+		&:after {
+		position: absolute;
+		content: "";
+		z-index: 1;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: #1fd1f9;
+		background-image: $mainGradient;
+		transition: all 0.3s ease;
+		}
+		&:hover {
+		background: transparent;
+		box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+						-4px -4px 6px 0 rgba(116, 125, 136, .2), 
+			inset -4px -4px 6px 0 rgba(255,255,255,.5),
+			inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
+		color: #fff;
+		}
+		&:hover:after {
+		transform: scale(2) rotate(180deg);
+		box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+						-4px -4px 6px 0 rgba(116, 125, 136, .2), 
+			inset -4px -4px 6px 0 rgba(255,255,255,.5),
+			inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
+		}
+	}
+	@media (max-width:$mobile){
+		padding: 30px 0;
+	}
+}
+
+
+.card {
+	flex: 0 1 50%;
+	position: relative;
+	z-index: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	&__content {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 80%;
+		min-width: 350px;
+		height: 90%;
+		margin-right: 30px;
+		border-radius: 50px 0px;
+		background: #0F1624;
+		box-shadow: 0px 0px 12px 0px #FFF;
+		@include adaptiveValue('padding', 30,20);
+		cursor: pointer;
+		transition: all 0.3s ease 0s;
+		position: relative;
+		&:hover{
+			box-shadow: 0px 0px 8px 0px #6978D1, 2px 2px 18px 5px #945DD6;
+		}
+		@media (max-width:$mobile){
+			width: 100%;
+		}
+	}
+	&__status{
+		display: none;
+		position: absolute;
+		left: 0;
+		background: $mainGradient;
+		padding: 10px 20px;
+		&._status{
+			display: block;
+			border-top-left-radius: 14px;
+			border-bottom-right-radius: 14px;
+		}
+	}
+
+	&__img-ibg{
+		height: 260px;
+		@include adaptiveValue('height', 260, 180);
+		margin-bottom: 25px;
+		padding-right: 100%;
+		
+	}
+
+	&__description{
+		margin-bottom: 25px;
+		flex: 1 1 auto;
+	}
+
+	&__name {
+		font-size: 26px;
+		font-weight: 600;
+		line-height: 88.5%;
+
+		&::after{
+			content: '';
+			display: block;
+			margin: 15px 0;
+			height: 4px;
+			position: relative;
+			left: -20%;
+			width: 140%;
+			border-radius: 83px;
+			background: $mainGradient;
+		}
+	}
+
+	&__button {
+		background: $mainGradient;
+		border-radius: 80px;
+		padding: 15px 50px;
+		font-weight: 600;
+		font-size: 18px;
+		flex: 0 0 50px;
+	}
+
+	@media (max-width:$mobile){
+		flex: 0 1 100%;
+		&__content{
+			min-width: 280px;
+			margin-right: 0;
+		}
+	}
+}
+
+
+// -----------------------------------------------------------------------
+
+.projects-page {
+
+		&__container {
+		}
+		&__title {
+		}
+
+		&__contant {
+			margin: 60px 0;
+		}
+		&__project{
+			margin-bottom: rem(30);
+		}
+		
+}
+.project{
+	display: flex;
+	gap: 30px;
+
+	.card{
+		.card__description{
+			display: none;
+		}
+		.card__name{
+			display: none;
+		}
+	}
+	@media (max-width:$mobile){
+		flex-direction: column-reverse;
+		gap: 10px;
+	}
+}
+.description{
+	flex: 0 1 40%;
+	padding: 20px;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	&__content{
+		flex: 1 1 auto;
+	}
+	&__title{
+		font-size: rem(25);
+		margin-bottom: rem(20);
+	}
+	&__text{
+		margin-bottom: rem(12);
+		> span{
+			color:#945DD6;
+		}
+		a{
+			border-bottom: 2px solid;
+			white-space: nowrap;
+		}
+	}
+	&__languages{
+		flex: 0 1 60px;
+	}
+}
+
+
+
+
+
+
+// ANIMATION - RUNNING LINE WITH LANGUAGES
+
+.languages{
+	position: relative;
+
+	&__list{
+		display: flex;
+		justify-content: space-around;
+		position: absolute;
+		top: 0;
+		width: 100%;
+		will-change: transform;
+		@media (max-width:$tablet){
+			width: 160%;
+		}
+		@media (max-width:$mobileSmall){
+			width: 180%;
+		}
+	}
+	&__item{
+		font-size: rem(60);
+	}
+}
+.tp-one {
+	animation-name: animate;
+	animation-duration: 6s;
+	animation-delay: -9s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+}
+.tp-two {
+	animation-name: animate2;
+	animation-duration: 6s;
+	animation-delay: 0s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+}
+
+@keyframes animate {
+	0% {
+		transform: translateX(-100%);
+	}
+	100% {
+		transform: translateX(100%);
+	}
+
+}
+@keyframes animate2 {
+	0% {
+		transform: translateX(-100%);
+	}
+	100% {
+		transform: translateX(100%);
+	}
+}

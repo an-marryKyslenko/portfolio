@@ -1,0 +1,159 @@
+.about {
+	margin: 60px 0;
+	&__contant {
+		background: #052D56;
+		position: relative;
+		overflow: hidden;
+		&::before{
+			content: '';
+			position: absolute;
+			width: 300px;
+			height: 300px;
+			border-radius: 581px;
+			background: #0F4279;
+			filter: blur(60px);
+			left: -140px;
+			top: -100px;
+		}
+		&::after{
+			content: '';
+			position: absolute;
+			width: 500px;
+			height: 600px;
+			border-radius: 623px;
+			background: #945DD6;
+			filter: blur(100px);
+			right: -400px;
+			bottom: -350px;
+		}
+
+		padding: 50px;
+		@media (max-width:$mobile){
+			padding: 20px 10px 30px;
+		}
+	}
+
+	&__describe{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		z-index: 2;
+		@media (max-width:$mobile){
+			flex-direction: row;
+			gap: 60px;
+			align-items: stretch;
+		}
+		@media (max-width:470px){
+			gap: 10px;
+		}
+	}
+	&__line{
+		width: 80%;
+		height: 15px;
+		background-color: #fff;
+		position: relative;
+		margin-bottom: 20px;
+		border-radius: 20px;
+		@media (max-width:$mobile){
+			width: 15px;
+			height: 25rem;
+			margin-bottom: rem(0);
+			margin-right: 20px;
+		}
+		@media (max-width:470px){
+			display: none;
+		}
+	}
+	&__year{
+		position: absolute;
+		top: -25px;
+		&::before{
+			content: '';
+			display: inline-block;
+			width: 30px;
+			height: 30px;
+			background-color: #fff;
+			left: 10%;
+			top: 100%;
+			border-radius: 50%;
+			position: absolute;
+		}
+		&:nth-child(2){
+			left: 50%;
+		}
+		&:nth-child(3){
+			left: 96%;
+		}
+		
+		
+	}
+	&__text{
+		display: flex;
+		gap: 30px;
+		justify-content: space-between;
+		position: relative;
+		z-index: 2;
+		@media (max-width:$mobile){
+			flex-direction: column;
+			font-size: rem(14);
+		}
+	}
+}
+
+@media (max-width:$mobile){
+	.about{
+		margin: 30px 0;
+	}
+	.about__year{
+		left: 20px;
+		top: 0;
+		
+		&:nth-child(2){
+			left: 20px;
+			top: 50%;
+		}
+		&:nth-child(3){
+			left: 22px;
+			top: 96%;
+		}
+
+		&::before{
+			width: 20px;
+			height: 20px;
+			left: -85%;
+			top: -10%;
+		}
+	}
+
+}	
+@media (max-width: 470px){
+	
+	.about__year{
+		position: relative;
+		display: block;
+		font-size: 20px;
+		margin-bottom: rem(10);
+		left: 50px;
+		top: 0;
+		bottom: 0;
+		&::before{
+			display: none;
+		}
+	}
+}
+
+
+// ---------about-page--------------------------------------------------
+.about-pg {
+
+	&__contant {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	&__video {
+		width: 80%;
+	}
+}
+

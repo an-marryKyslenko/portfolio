@@ -1,0 +1,120 @@
+%ic {
+	font-family: "icons";
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+[class*="_icon-"] {
+	&:before {
+		@extend %ic;
+		display: block;
+	}
+}
+@font-face {
+	font-family: 'icomoon';
+	src:  url('fonts/icomoon.eot?dipn8b');
+	src:  url('fonts/icomoon.eot?dipn8b#iefix') format('embedded-opentype'),
+	  url('fonts/icomoon.ttf?dipn8b') format('truetype'),
+	  url('fonts/icomoon.woff?dipn8b') format('woff'),
+	  url('fonts/icomoon.svg?dipn8b#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+	font-display: block;
+ }
+ 
+ [class^="icon-"], [class*=" icon-"] {
+	/* use !important to prevent issues with browser extensions that change fonts */
+	font-family: 'icomoon' !important;
+	speak: never;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+ 
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+ }
+ [class^="icon-"]::before, [class*=" icon-"]::before {
+	display: inline-block;
+	padding: 0 5px;
+ }
+ 
+ .icon-gulp:before {
+	content: "\e904";
+	color: #da4648;
+ }
+ .icon-next:before {
+	content: "\e90b";
+ }
+ .icon-mysql:before {
+	content: "\e90c";
+	color: #4479a1;
+ }
+ .icon-typescript:before {
+	content: "\e908";
+	color: #007acc;
+ }
+ .icon-angular:before {
+	content: "\e909";
+	color: #dd0031;
+ }
+ .icon-graphql:before {
+	content: "\e90a";
+	color: #e10098;
+ }
+ .icon-mongodb:before {
+	content: "\e907";
+	color: #47a248;
+ }
+ .icon-html:before {
+	content: "\e906";
+	color: #e34f26;
+ }
+ .icon-css:before {
+	content: "\e905";
+	color: #1572b6;
+ }
+ .icon-node:before {
+	content: "\e902";
+	color: #393;
+ }
+ .icon-react:before {
+	content: "\e903";
+	color: #61dafb;
+ }
+ .icon-javascript:before {
+	content: "\e901";
+	color: #f7df1e;
+ }
+ .icon-logo:before {
+	content: "\e900";
+	color: #fff;
+ }
+ .icon-folder-download:before {
+	content: "\e933";
+ }
+ .icon-phone:before {
+	content: "\e942";
+ }
+ .icon-envelop:before {
+	content: "\e945";
+ }
+ .icon-link:before {
+	content: "\e9cb";
+ }
+ .icon-instagram:before {
+	content: "\ea92";
+ }
+ .icon-github:before {
+	content: "\eab0";
+ }
+ .icon-linkedin:before {
+	content: "\eac9";
+ }
+ 
