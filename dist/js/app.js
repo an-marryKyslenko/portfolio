@@ -426,15 +426,15 @@
     }));
     const downloadButton = document.getElementById("downloadCV");
     downloadButton.addEventListener("click", downloadCV);
-    function downloadCV() {
-        var cvUrl = "../img/resume/AnnaMariia_Kyslenko_CV.pdf";
+    function downloadCV(e) {
+        e.preventDefault();
+        var cvUrl = "img/resume/AnnaMariia_Kyslenko_CV.pdf";
         var link = document.createElement("a");
         link.href = cvUrl;
         link.download = "AnnaMariia_Kyslenko_CV.pdf";
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-        console.log("work download");
     }
     window["FLS"] = true;
     isWebp();
