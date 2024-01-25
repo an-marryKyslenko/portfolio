@@ -427,14 +427,13 @@
     const downloadButton = document.getElementById("downloadCV");
     downloadButton.addEventListener("click", downloadCV);
     function downloadCV() {
-        var cvUrl = "../img/resume/AnnaMariia_Kyslenko_CV.pdf";
+        var cvUrl = "img/resume/annamariia_kyslenko_cv.pdf";
         var link = document.createElement("a");
         link.href = cvUrl;
-        link.download = "AnnaMariia_Kyslenko_CV.pdf";
+        link.setAttribute("download", "annamariia_kyslenko_cv.pdf");
         document.body.appendChild(link);
         link.click();
-        document.body.removeChild(link);
-        console.log("work download");
+        link.remove();
     }
     window["FLS"] = true;
     isWebp();
