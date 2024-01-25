@@ -280,12 +280,31 @@
         id: 1,
         name: "Leaf store",
         image: "../img/Screenshot_4.png",
-        description: "In this project I practice with ReactJs, Express and MongoDB. It must be real web site with products list , filter, bascet and authorizatin. All changes have saved in MongoDB.",
+        description: "In this project I practice with ReactJs, ExpressJs and MongoDB. It must be real web site with products list , filter, bascet and authorizatin. All changes have saved in MongoDB.",
         link: "https://leaf-store.vercel.app/",
         status: "in process",
         languages: [ "html", "react", "css", "mongodb", "node", "javascript" ],
         started: "Jun, 2023",
         linkToGit: "https://github.com/an-marryKyslenko/leaf-store"
+    }, {
+        id: 10,
+        name: "Gostro",
+        status: "in process",
+        image: "../img/Screenshot_10.png",
+        description: "Lending page compiled with React, React Router Dom",
+        link: "https://gostro-knife.vercel.app/",
+        languages: [ "html", "javascript", "css", "react" ],
+        started: "Dec, 2023",
+        linkToGit: "https://github.com/an-marryKyslenko/khife-react-app"
+    }, {
+        id: 11,
+        name: "Vanlife",
+        image: "../img/Screenshot_11.png",
+        description: "Project was created by React. In this project I tred to practic React Router Dom",
+        link: "https://vanlife-an-marrykyslenko.vercel.app/",
+        languages: [ "html", "javascript", "css", "react" ],
+        started: "Jun, 2023",
+        linkToGit: "https://github.com/an-marryKyslenko/vanlife?tab=readme-ov-file"
     }, {
         id: 2,
         name: "Food mood",
