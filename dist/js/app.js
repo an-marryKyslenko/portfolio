@@ -425,10 +425,30 @@
         techBlock.appendChild(range);
     }));
     const downloadButton = document.getElementById("downloadCV");
-    downloadButton.addEventListener("click", openPdf);
-    function openPdf() {
-        var cvUrl = "img/resume/annamariia_kyslenko_cv.pdf";
-        window.open(cvUrl, "_blank");
+    const pdfFile = "img/resume/annamariia_kyslenko_cv.pdf";
+    downloadButton.addEventListener("click", (() => download_file(pdfFile, "annamariia_kyslenko_cv.pdf")));
+    function download_file(fileURL, fileName) {
+        if (!window.ActiveXObject) {
+            var save = document.createElement("a");
+            save.href = fileURL;
+            save.target = "_blank";
+            var filename = fileURL.substring(fileURL.lastIndexOf("/") + 1);
+            save.download = fileName || filename;
+            if (navigator.userAgent.toLowerCase().match(/(ipad|iphone|safari)/) && navigator.userAgent.search("Chrome") < 0) document.location = save.href; else {
+                var evt = new MouseEvent("click", {
+                    view: window,
+                    bubbles: true,
+                    cancelable: false
+                });
+                save.dispatchEvent(evt);
+                (window.URL || window.webkitURL).revokeObjectURL(save.href);
+            }
+        } else if (!!window.ActiveXObject && document.execCommand) {
+            var _window = window.open(fileURL, "_blank");
+            _window.document.close();
+            _window.document.execCommand("SaveAs", true, fileName || fileURL);
+            _window.close();
+        }
     }
     window["FLS"] = true;
     isWebp();

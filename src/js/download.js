@@ -1,29 +1,36 @@
 const downloadButton = document.getElementById('downloadCV');
 
-downloadButton.addEventListener('click', openPdf)
+const pdfFile = 'img/resume/annamariia_kyslenko_cv.pdf'
+downloadButton.addEventListener('click', () => download_file(pdfFile, 'annamariia_kyslenko_cv.pdf'))
 
 
+function download_file(fileURL, fileName) {
+	// for non-IE
+	if (!window.ActiveXObject) {
+		var save = document.createElement('a');
+		save.href = fileURL;
+		save.target = '_blank';
+		var filename = fileURL.substring(fileURL.lastIndexOf('/') + 1);
+		save.download = fileName || filename;
+		if (navigator.userAgent.toLowerCase().match(/(ipad|iphone|safari)/) && navigator.userAgent.search("Chrome") < 0) {
+			document.location = save.href;
+			// window event not working here
+		} else {
+			var evt = new MouseEvent('click', {
+				'view': window,
+				'bubbles': true,
+				'cancelable': false
+			});
+			save.dispatchEvent(evt);
+			(window.URL || window.webkitURL).revokeObjectURL(save.href);
+		}
+	}
 
-function openPdf(){
-	var cvUrl = 'img/resume/annamariia_kyslenko_cv.pdf';
-
-	window.open(cvUrl, '_blank')
-}
-function  downloadCV() {
-	// Створюємо посилання на ваш файл резюме
-	var cvUrl = 'img/resume/annamariia_kyslenko_cv.pdf';
-
-	// Створюємо елемент <a> (посилання) та налаштовуємо його атрибути
-	var link = document.createElement('a');
-	link.href = cvUrl;
-	link.setAttribute('download', 'annamariia_kyslenko_cv.pdf')
-
-	// Додаємо елемент <a> до документу
-	document.body.appendChild(link);
-
-	// Симулюємо клік на посилання, щоб запустити завантаження
-	link.click();
-
-	// Видаляємо елемент <a> з документу (необов'язково, але може бути корисно)
-	link.remove()
+	// for IE < 11
+	else if (!!window.ActiveXObject && document.execCommand) {
+		var _window = window.open(fileURL, '_blank');
+		_window.document.close();
+		_window.document.execCommand('SaveAs', true, fileName || fileURL)
+		_window.close();
+	}
 }
