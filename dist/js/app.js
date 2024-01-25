@@ -425,15 +425,10 @@
         techBlock.appendChild(range);
     }));
     const downloadButton = document.getElementById("downloadCV");
-    downloadButton.addEventListener("click", downloadCV);
-    function downloadCV() {
+    downloadButton.addEventListener("click", openPdf);
+    function openPdf() {
         var cvUrl = "img/resume/annamariia_kyslenko_cv.pdf";
-        var link = document.createElement("a");
-        link.href = cvUrl;
-        link.setAttribute("download", "annamariia_kyslenko_cv.pdf");
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
+        window.open(cvUrl, "_blank");
     }
     window["FLS"] = true;
     isWebp();
