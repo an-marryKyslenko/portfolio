@@ -11,7 +11,6 @@ function downloadCV(e) {
 	// Створюємо елемент <a> (посилання) та налаштовуємо його атрибути
 	var link = document.createElement('a');
 	link.href = cvUrl;
-	link.download = 'AnnaMariia_Kyslenko_CV.pdf';
 
 	// Додаємо елемент <a> до документу
 	document.body.appendChild(link);
