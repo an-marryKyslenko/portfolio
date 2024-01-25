@@ -1,10 +1,15 @@
 const downloadButton = document.getElementById('downloadCV');
 
-downloadButton.addEventListener('click', downloadCV)
+downloadButton.addEventListener('click', openPdf)
 
 
-function downloadCV(e) {
-	e.preventDefault();
+
+function openPdf(){
+	var cvUrl = 'img/resume/annamariia_kyslenko_cv.pdf';
+
+	window.open(cvUrl, '_blank')
+}
+function  downloadCV() {
 	// Створюємо посилання на ваш файл резюме
 	var cvUrl = 'img/resume/annamariia_kyslenko_cv.pdf';
 
