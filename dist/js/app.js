@@ -65,105 +65,252 @@
             if (window.FLS) console.log(message);
         }), 0);
     }
-    function uniqArray(array) {
-        return array.filter((function(item, index, self) {
-            return self.indexOf(item) === index;
-        }));
-    }
-    class ScrollWatcher {
-        constructor(props) {
-            let defaultConfig = {
-                logging: true
+    class Popup {
+        constructor(options) {
+            let config = {
+                logging: true,
+                init: true,
+                attributeOpenButton: "data-popup",
+                attributeCloseButton: "data-close",
+                fixElementSelector: "[data-lp]",
+                youtubeAttribute: "data-popup-youtube",
+                youtubePlaceAttribute: "data-popup-youtube-place",
+                setAutoplayYoutube: true,
+                classes: {
+                    popup: "popup",
+                    popupContent: "popup__content",
+                    popupActive: "popup_show",
+                    bodyActive: "popup-show"
+                },
+                focusCatch: true,
+                closeEsc: true,
+                bodyLock: true,
+                hashSettings: {
+                    location: true,
+                    goHash: true
+                },
+                on: {
+                    beforeOpen: function() {},
+                    afterOpen: function() {},
+                    beforeClose: function() {},
+                    afterClose: function() {}
+                }
             };
-            this.config = Object.assign(defaultConfig, props);
-            this.observer;
-            !document.documentElement.classList.contains("watcher") ? this.scrollWatcherRun() : null;
+            this.youTubeCode;
+            this.isOpen = false;
+            this.targetOpen = {
+                selector: false,
+                element: false
+            };
+            this.previousOpen = {
+                selector: false,
+                element: false
+            };
+            this.lastClosed = {
+                selector: false,
+                element: false
+            };
+            this._dataValue = false;
+            this.hash = false;
+            this._reopen = false;
+            this._selectorOpen = false;
+            this.lastFocusEl = false;
+            this._focusEl = [ "a[href]", 'input:not([disabled]):not([type="hidden"]):not([aria-hidden])', "button:not([disabled]):not([aria-hidden])", "select:not([disabled]):not([aria-hidden])", "textarea:not([disabled]):not([aria-hidden])", "area[href]", "iframe", "object", "embed", "[contenteditable]", '[tabindex]:not([tabindex^="-"])' ];
+            this.options = {
+                ...config,
+                ...options,
+                classes: {
+                    ...config.classes,
+                    ...options?.classes
+                },
+                hashSettings: {
+                    ...config.hashSettings,
+                    ...options?.hashSettings
+                },
+                on: {
+                    ...config.on,
+                    ...options?.on
+                }
+            };
+            this.bodyLock = false;
+            this.options.init ? this.initPopups() : null;
         }
-        scrollWatcherUpdate() {
-            this.scrollWatcherRun();
+        initPopups() {
+            this.popupLogging(`Прокинувся`);
+            this.eventsPopup();
         }
-        scrollWatcherRun() {
-            document.documentElement.classList.add("watcher");
-            this.scrollWatcherConstructor(document.querySelectorAll("[data-watch]"));
+        eventsPopup() {
+            document.addEventListener("click", function(e) {
+                const buttonOpen = e.target.closest(`[${this.options.attributeOpenButton}]`);
+                if (buttonOpen) {
+                    e.preventDefault();
+                    this._dataValue = buttonOpen.getAttribute(this.options.attributeOpenButton) ? buttonOpen.getAttribute(this.options.attributeOpenButton) : "error";
+                    this.youTubeCode = buttonOpen.getAttribute(this.options.youtubeAttribute) ? buttonOpen.getAttribute(this.options.youtubeAttribute) : null;
+                    if ("error" !== this._dataValue) {
+                        if (!this.isOpen) this.lastFocusEl = buttonOpen;
+                        this.targetOpen.selector = `${this._dataValue}`;
+                        this._selectorOpen = true;
+                        this.open();
+                        return;
+                    } else this.popupLogging(`Йой, не заповнено атрибут у ${buttonOpen.classList}`);
+                    return;
+                }
+                const buttonClose = e.target.closest(`[${this.options.attributeCloseButton}]`);
+                if (buttonClose || !e.target.closest(`.${this.options.classes.popupContent}`) && this.isOpen) {
+                    e.preventDefault();
+                    this.close();
+                    return;
+                }
+            }.bind(this));
+            document.addEventListener("keydown", function(e) {
+                if (this.options.closeEsc && 27 == e.which && "Escape" === e.code && this.isOpen) {
+                    e.preventDefault();
+                    this.close();
+                    return;
+                }
+                if (this.options.focusCatch && 9 == e.which && this.isOpen) {
+                    this._focusCatch(e);
+                    return;
+                }
+            }.bind(this));
+            if (this.options.hashSettings.goHash) {
+                window.addEventListener("hashchange", function() {
+                    if (window.location.hash) this._openToHash(); else this.close(this.targetOpen.selector);
+                }.bind(this));
+                window.addEventListener("load", function() {
+                    if (window.location.hash) this._openToHash();
+                }.bind(this));
+            }
         }
-        scrollWatcherConstructor(items) {
-            if (items.length) {
-                this.scrollWatcherLogging(`Прокинувся, стежу за об'єктами (${items.length})...`);
-                let uniqParams = uniqArray(Array.from(items).map((function(item) {
-                    return `${item.dataset.watchRoot ? item.dataset.watchRoot : null}|${item.dataset.watchMargin ? item.dataset.watchMargin : "0px"}|${item.dataset.watchThreshold ? item.dataset.watchThreshold : 0}`;
-                })));
-                uniqParams.forEach((uniqParam => {
-                    let uniqParamArray = uniqParam.split("|");
-                    let paramsWatch = {
-                        root: uniqParamArray[0],
-                        margin: uniqParamArray[1],
-                        threshold: uniqParamArray[2]
-                    };
-                    let groupItems = Array.from(items).filter((function(item) {
-                        let watchRoot = item.dataset.watchRoot ? item.dataset.watchRoot : null;
-                        let watchMargin = item.dataset.watchMargin ? item.dataset.watchMargin : "0px";
-                        let watchThreshold = item.dataset.watchThreshold ? item.dataset.watchThreshold : 0;
-                        if (String(watchRoot) === paramsWatch.root && String(watchMargin) === paramsWatch.margin && String(watchThreshold) === paramsWatch.threshold) return item;
+        open(selectorValue) {
+            if (bodyLockStatus) {
+                this.bodyLock = document.documentElement.classList.contains("lock") && !this.isOpen ? true : false;
+                if (selectorValue && "string" === typeof selectorValue && "" !== selectorValue.trim()) {
+                    this.targetOpen.selector = selectorValue;
+                    this._selectorOpen = true;
+                }
+                if (this.isOpen) {
+                    this._reopen = true;
+                    this.close();
+                }
+                if (!this._selectorOpen) this.targetOpen.selector = this.lastClosed.selector;
+                if (!this._reopen) this.previousActiveElement = document.activeElement;
+                this.targetOpen.element = document.querySelector(this.targetOpen.selector);
+                if (this.targetOpen.element) {
+                    if (this.youTubeCode) {
+                        const codeVideo = this.youTubeCode;
+                        const urlVideo = `https://www.youtube.com/embed/${codeVideo}?rel=0&showinfo=0&autoplay=1`;
+                        const iframe = document.createElement("iframe");
+                        iframe.setAttribute("allowfullscreen", "");
+                        const autoplay = this.options.setAutoplayYoutube ? "autoplay;" : "";
+                        iframe.setAttribute("allow", `${autoplay}; encrypted-media`);
+                        iframe.setAttribute("src", urlVideo);
+                        if (!this.targetOpen.element.querySelector(`[${this.options.youtubePlaceAttribute}]`)) {
+                            this.targetOpen.element.querySelector(".popup__text").setAttribute(`${this.options.youtubePlaceAttribute}`, "");
+                        }
+                        this.targetOpen.element.querySelector(`[${this.options.youtubePlaceAttribute}]`).appendChild(iframe);
+                    }
+                    if (this.options.hashSettings.location) {
+                        this._getHash();
+                        this._setHash();
+                    }
+                    this.options.on.beforeOpen(this);
+                    document.dispatchEvent(new CustomEvent("beforePopupOpen", {
+                        detail: {
+                            popup: this
+                        }
                     }));
-                    let configWatcher = this.getScrollWatcherConfig(paramsWatch);
-                    this.scrollWatcherInit(groupItems, configWatcher);
-                }));
-            } else this.scrollWatcherLogging("Сплю, немає об'єктів для стеження. ZzzZZzz");
-        }
-        getScrollWatcherConfig(paramsWatch) {
-            let configWatcher = {};
-            if (document.querySelector(paramsWatch.root)) configWatcher.root = document.querySelector(paramsWatch.root); else if ("null" !== paramsWatch.root) this.scrollWatcherLogging(`Эмм... батьківського об'єкта ${paramsWatch.root} немає на сторінці`);
-            configWatcher.rootMargin = paramsWatch.margin;
-            if (paramsWatch.margin.indexOf("px") < 0 && paramsWatch.margin.indexOf("%") < 0) {
-                this.scrollWatcherLogging(`йой, налаштування data-watch-margin потрібно задавати в PX або %`);
-                return;
-            }
-            if ("prx" === paramsWatch.threshold) {
-                paramsWatch.threshold = [];
-                for (let i = 0; i <= 1; i += .005) paramsWatch.threshold.push(i);
-            } else paramsWatch.threshold = paramsWatch.threshold.split(",");
-            configWatcher.threshold = paramsWatch.threshold;
-            return configWatcher;
-        }
-        scrollWatcherCreate(configWatcher) {
-            this.observer = new IntersectionObserver(((entries, observer) => {
-                entries.forEach((entry => {
-                    this.scrollWatcherCallback(entry, observer);
-                }));
-            }), configWatcher);
-        }
-        scrollWatcherInit(items, configWatcher) {
-            this.scrollWatcherCreate(configWatcher);
-            items.forEach((item => this.observer.observe(item)));
-        }
-        scrollWatcherIntersecting(entry, targetElement) {
-            if (entry.isIntersecting) {
-                !targetElement.classList.contains("_watcher-view") ? targetElement.classList.add("_watcher-view") : null;
-                this.scrollWatcherLogging(`Я бачу ${targetElement.classList}, додав клас _watcher-view`);
-            } else {
-                targetElement.classList.contains("_watcher-view") ? targetElement.classList.remove("_watcher-view") : null;
-                this.scrollWatcherLogging(`Я не бачу ${targetElement.classList}, прибрав клас _watcher-view`);
+                    this.targetOpen.element.classList.add(this.options.classes.popupActive);
+                    document.documentElement.classList.add(this.options.classes.bodyActive);
+                    if (!this._reopen) !this.bodyLock ? bodyLock() : null; else this._reopen = false;
+                    this.targetOpen.element.setAttribute("aria-hidden", "false");
+                    this.previousOpen.selector = this.targetOpen.selector;
+                    this.previousOpen.element = this.targetOpen.element;
+                    this._selectorOpen = false;
+                    this.isOpen = true;
+                    setTimeout((() => {
+                        this._focusTrap();
+                    }), 50);
+                    this.options.on.afterOpen(this);
+                    document.dispatchEvent(new CustomEvent("afterPopupOpen", {
+                        detail: {
+                            popup: this
+                        }
+                    }));
+                    this.popupLogging(`Відкрив попап`);
+                } else this.popupLogging(`Йой, такого попапу немає. Перевірте коректність введення. `);
             }
         }
-        scrollWatcherOff(targetElement, observer) {
-            observer.unobserve(targetElement);
-            this.scrollWatcherLogging(`Я перестав стежити за ${targetElement.classList}`);
-        }
-        scrollWatcherLogging(message) {
-            this.config.logging ? functions_FLS(`[Спостерігач]: ${message}`) : null;
-        }
-        scrollWatcherCallback(entry, observer) {
-            const targetElement = entry.target;
-            this.scrollWatcherIntersecting(entry, targetElement);
-            targetElement.hasAttribute("data-watch-once") && entry.isIntersecting ? this.scrollWatcherOff(targetElement, observer) : null;
-            document.dispatchEvent(new CustomEvent("watcherCallback", {
+        close(selectorValue) {
+            if (selectorValue && "string" === typeof selectorValue && "" !== selectorValue.trim()) this.previousOpen.selector = selectorValue;
+            if (!this.isOpen || !bodyLockStatus) return;
+            this.options.on.beforeClose(this);
+            document.dispatchEvent(new CustomEvent("beforePopupClose", {
                 detail: {
-                    entry
+                    popup: this
                 }
             }));
+            if (this.youTubeCode) if (this.targetOpen.element.querySelector(`[${this.options.youtubePlaceAttribute}]`)) this.targetOpen.element.querySelector(`[${this.options.youtubePlaceAttribute}]`).innerHTML = "";
+            this.previousOpen.element.classList.remove(this.options.classes.popupActive);
+            this.previousOpen.element.setAttribute("aria-hidden", "true");
+            if (!this._reopen) {
+                document.documentElement.classList.remove(this.options.classes.bodyActive);
+                !this.bodyLock ? bodyUnlock() : null;
+                this.isOpen = false;
+            }
+            this._removeHash();
+            if (this._selectorOpen) {
+                this.lastClosed.selector = this.previousOpen.selector;
+                this.lastClosed.element = this.previousOpen.element;
+            }
+            this.options.on.afterClose(this);
+            document.dispatchEvent(new CustomEvent("afterPopupClose", {
+                detail: {
+                    popup: this
+                }
+            }));
+            setTimeout((() => {
+                this._focusTrap();
+            }), 50);
+            this.popupLogging(`Закрив попап`);
+        }
+        _getHash() {
+            if (this.options.hashSettings.location) this.hash = this.targetOpen.selector.includes("#") ? this.targetOpen.selector : this.targetOpen.selector.replace(".", "#");
+        }
+        _openToHash() {
+            let classInHash = document.querySelector(`.${window.location.hash.replace("#", "")}`) ? `.${window.location.hash.replace("#", "")}` : document.querySelector(`${window.location.hash}`) ? `${window.location.hash}` : null;
+            const buttons = document.querySelector(`[${this.options.attributeOpenButton} = "${classInHash}"]`) ? document.querySelector(`[${this.options.attributeOpenButton} = "${classInHash}"]`) : document.querySelector(`[${this.options.attributeOpenButton} = "${classInHash.replace(".", "#")}"]`);
+            this.youTubeCode = buttons.getAttribute(this.options.youtubeAttribute) ? buttons.getAttribute(this.options.youtubeAttribute) : null;
+            if (buttons && classInHash) this.open(classInHash);
+        }
+        _setHash() {
+            history.pushState("", "", this.hash);
+        }
+        _removeHash() {
+            history.pushState("", "", window.location.href.split("#")[0]);
+        }
+        _focusCatch(e) {
+            const focusable = this.targetOpen.element.querySelectorAll(this._focusEl);
+            const focusArray = Array.prototype.slice.call(focusable);
+            const focusedIndex = focusArray.indexOf(document.activeElement);
+            if (e.shiftKey && 0 === focusedIndex) {
+                focusArray[focusArray.length - 1].focus();
+                e.preventDefault();
+            }
+            if (!e.shiftKey && focusedIndex === focusArray.length - 1) {
+                focusArray[0].focus();
+                e.preventDefault();
+            }
+        }
+        _focusTrap() {
+            const focusable = this.previousOpen.element.querySelectorAll(this._focusEl);
+            if (!this.isOpen && this.lastFocusEl) this.lastFocusEl.focus(); else focusable[0].focus();
+        }
+        popupLogging(message) {
+            this.options.logging ? functions_FLS(`[Попапос]: ${message}`) : null;
         }
     }
-    modules_flsModules.watcher = new ScrollWatcher({});
+    modules_flsModules.popup = new Popup({});
     let addWindowScrollEvent = false;
     setTimeout((() => {
         if (addWindowScrollEvent) {
@@ -362,6 +509,63 @@
         started: "Dec, 2022",
         linkToGit: "https://github.com/an-marryKyslenko/nft-page"
     } ];
+    const education = {
+        id: "ed-1",
+        name: "Vinnytsia National Agrarian University",
+        img: "img/education/IMG_2505.jpeg",
+        link: "",
+        description: '<strong>Bachelor</strong> Degree Field of study <strong>"Acounting and audit"</strong>  <br> Professional qualification <strong>accountant and cashier expert</strong>',
+        date: "2014-2017"
+    };
+    const certifications = [ {
+        id: "cer-1",
+        name: "Responsive Web Design",
+        school: "freeCodeCamp",
+        img: "img/education/Screenshot_1.png",
+        link: "https://www.freecodecamp.org/certification/fccc1dcb7f9-5c49-4fd0-a164-dc8471380155/responsive-web-design",
+        description: "",
+        date: "November 22, 2022"
+    }, {
+        id: "cer-2",
+        name: "JavaScript Algorithms and Data Structures",
+        school: "freeCodeCamp",
+        img: "img/education/Screenshot_2.png",
+        link: "https://www.freecodecamp.org/certification/fccc1dcb7f9-5c49-4fd0-a164-dc8471380155/javascript-algorithms-and-data-structures",
+        description: "",
+        date: "Novemper 3, 2022"
+    }, {
+        id: "cer-3",
+        name: "Become a JavaScript Developer",
+        school: "LinkedInLearning",
+        img: "img/education/Screenshot_12.png",
+        link: "https://www.linkedin.com/learning/certificates/424fb1b7fbfb2b1831dcd94956c497ed3c85f7ccd20ccf83b05c706afc2627a7",
+        description: "Learning Path - 28 hours",
+        date: "October 7, 2023"
+    }, {
+        id: "cer-4",
+        name: "Became a Full-Stack Web Developer",
+        school: "LinkedInLearning",
+        img: "img/education/Screenshot_3.png",
+        link: "https://www.linkedin.com/learning/certificates/f0348c67876946d0077b25f6a7f7546c990f0becef4148ab47d885c1783d0e63",
+        description: "Learning Path - 30 hours",
+        date: "October 24, 2023"
+    }, {
+        id: "cer-5",
+        name: "Explore React.js Development",
+        school: "LinkedInLearning",
+        img: "img/education/Screenshot_4.png",
+        link: "https://www.linkedin.com/learning/certificates/f0348c67876946d0077b25f6a7f7546c990f0becef4148ab47d885c1783d0e63",
+        description: "Learning Path - 20 hours 20 minutes",
+        date: "October 29, 2023"
+    }, {
+        id: "cer-6",
+        name: "SQL Essential Training",
+        school: "LinkedInLearning",
+        img: "img/education/Screenshot_5.png",
+        link: "https://www.linkedin.com/learning/certificates/f0348c67876946d0077b25f6a7f7546c990f0becef4148ab47d885c1783d0e63",
+        description: "Course - 4 hours 26 minutes",
+        date: "October 11, 2023"
+    } ];
     const cards = document.getElementById("cards");
     let count = 0;
     if (!!cards) projectsList.forEach((elem => {
@@ -424,31 +628,48 @@
         range.innerHTML = `\n\t\t\t<div class="range__contant">\n\t\t\t\t<h4 class="range__title">${elem.name}</h4>\n\t\t\t\t<p class="range__level">${elem.level}</p>\n\t\t\t\t<div class="range__line ${elem.level}"></div>\n\t\t\t</div>\n\t\t`;
         techBlock.appendChild(range);
     }));
-    const downloadButton = document.getElementById("downloadCV");
-    const pdfFile = "img/resume/annamariia_kyslenko_cv.pdf";
-    downloadButton.addEventListener("click", (() => download_file(pdfFile, "annamariia_kyslenko_cv.pdf")));
-    function download_file(fileURL, fileName) {
-        if (!window.ActiveXObject) {
-            var save = document.createElement("a");
-            save.href = fileURL;
-            save.target = "_blank";
-            var filename = fileURL.substring(fileURL.lastIndexOf("/") + 1);
-            save.download = fileName || filename;
-            if (navigator.userAgent.toLowerCase().match(/(ipad|iphone|safari)/) && navigator.userAgent.search("Chrome") < 0) document.location = save.href; else {
-                var evt = new MouseEvent("click", {
-                    view: window,
-                    bubbles: true,
-                    cancelable: false
-                });
-                save.dispatchEvent(evt);
-                (window.URL || window.webkitURL).revokeObjectURL(save.href);
+    const educationSection = document.getElementById("education");
+    const certificationSection = document.getElementById("certifications");
+    function educationItem(data) {
+        const {img, name, date, id, description, link} = data;
+        return `\n\t\t<div class="item-ed__content">\n\t\t\t<div id=${id} class="item-ed__img" title="Click to open">\n\t\t\t\t<img src=${img} data-popup="#popup" />\n\t\t\t</div>\n\t\t\t<div class="item-ed__info">\n\t\t\t\t<h3 class="item-ed__title"><a href=${link || "#"}>${name}</a></h3>\n\t\t\t\t<div class="item-ed__date">${date}</div>\n\t\t\t\t<p class="item-ed__description">${description}</p>\n\t\t\t</div>\n\t\t</div>\n\t`;
+    }
+    if (!!educationSection) {
+        const itemContainer = document.createElement("div");
+        itemContainer.classList.add("education__item");
+        itemContainer.classList.add("item-ed");
+        itemContainer.setAttribute("id", education.id);
+        itemContainer.innerHTML = educationItem(education);
+        educationSection.appendChild(itemContainer);
+        document.getElementById(education.id).addEventListener("click", (e => {
+            let el = e.target;
+            if (!!el.src) {
+                console.log(el);
+                const popup = document.querySelector(".popup__text");
+                popup.innerHTML = `<img src=${el.src}/>`;
             }
-        } else if (!!window.ActiveXObject && document.execCommand) {
-            var _window = window.open(fileURL, "_blank");
-            _window.document.close();
-            _window.document.execCommand("SaveAs", true, fileName || fileURL);
-            _window.close();
-        }
+        }));
+    }
+    if (!!certificationSection) {
+        document.getElementById("popup");
+        certifications.forEach((item => {
+            const itemContainer = document.createElement("div");
+            itemContainer.classList.add("education__item");
+            itemContainer.classList.add("item-ed");
+            itemContainer.innerHTML = educationItem(item);
+            certificationSection.appendChild(itemContainer);
+        }));
+        certificationSection.addEventListener("click", (e => {
+            if (e.target.closest(".item-ed__img")) {
+                let imageId = e.target.closest(".item-ed__img").id;
+                certifications.forEach((item => {
+                    if (item.id === imageId) {
+                        const popup = document.querySelector(".popup__text");
+                        popup.innerHTML = `<img src=${item.img}/>`;
+                    }
+                }));
+            }
+        }));
     }
     window["FLS"] = true;
     isWebp();

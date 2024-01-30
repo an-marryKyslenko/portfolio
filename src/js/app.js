@@ -29,7 +29,7 @@ flsFunctions.isWebp();
 // flsFunctions.addTouchClass();
 /* Додавання loaded для HTML після повного завантаження сторінки */
 // flsFunctions.addLoadedClass();
- //TODO Модуль для роботи з меню (Бургер) 
+//TODO Модуль для роботи з меню (Бургер) 
 flsFunctions.menuInit();
 /* Враховування плаваючої панелі на мобільних пристроях при 100vh */
 // flsFunctions.fullVHfix();
@@ -76,7 +76,7 @@ flsFunctions.menuInit();
 Документація: https://template.fls.guru/template-docs/funkcional-popup.html
 Сніппет (HTML): pl, pop
 */
-// import './libs/popup.js'
+import './libs/popup.js'
 
 /*
 Модуль паралаксу мишею
@@ -172,7 +172,7 @@ flsForms.formFieldsInit({
 //TODO Спостерігач за об'єктами з атрибутом data-watch
 // Документація: https://template.fls.guru/template-docs/modul-nabljudatel-za-poyavleniem-elementa-pri-skrolle.html
 // Сніппет(HTML):
-import './libs/watcher.js'
+// import './libs/watcher.js'
 
 //TODO Модуль поекранної прокрутки
 // Документація: https://template.fls.guru/template-docs/modul-poekrannoj-prokrutki-stranicy-fullpage.html
@@ -233,4 +233,5 @@ import "./files/script.js";
 
 import "./cards.js"
 import "./technologies.js"
-import "./download.js"
+// import "./download.js"
+import './education.js'

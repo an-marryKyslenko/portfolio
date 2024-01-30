@@ -34,7 +34,7 @@ export const projectsList = [
 		description: 'In this project I practice with ReactJs, ExpressJs and MongoDB. It must be real web site with products list , filter, bascet and authorizatin. All changes have saved in MongoDB.',
 		link: 'https://leaf-store.vercel.app/',
 		status: 'in process',
-		languages: ['html', 'react', 'css', 'mongodb', 'node','javascript'],
+		languages: ['html', 'react', 'css', 'mongodb', 'node', 'javascript'],
 		started: 'Jun, 2023',
 		linkToGit: 'https://github.com/an-marryKyslenko/leaf-store',
 
@@ -87,7 +87,7 @@ export const projectsList = [
 		description: 'Lending page compiled with Gulp',
 		link: 'https://an-marrykyslenko.github.io/trave-page/',
 		status: 'in process',
-		languages: ['html', 'css', 'javascript','gulp'],
+		languages: ['html', 'css', 'javascript', 'gulp'],
 		linkToGit: 'https://github.com/an-marryKyslenko/trave-page',
 		started: 'Oct, 2022'
 	},
@@ -108,7 +108,7 @@ export const projectsList = [
 		image: '../img/Screenshot_7.png',
 		description: 'Lending page compiled with Gulp',
 		link: 'https://an-marrykyslenko.github.io/jaggo/',
-		languages: ['html', 'css', 'javascript','gulp'],
+		languages: ['html', 'css', 'javascript', 'gulp'],
 		started: 'Jan, 2023',
 		linkToGit: 'https://github.com/an-marryKyslenko/jaggo'
 	},
@@ -121,5 +121,70 @@ export const projectsList = [
 		languages: ['html', 'javascript', 'css', 'gulp'],
 		started: 'Dec, 2022',
 		linkToGit: 'https://github.com/an-marryKyslenko/nft-page'
+	},
+]
+export const education = {
+	id: 'ed-1',
+	name: 'Vinnytsia National Agrarian University',
+	img: 'img/education/IMG_2505.jpeg',
+	link: '',
+	description: '<strong>Bachelor</strong> Degree Field of study <strong>"Acounting and audit"</strong>  <br> Professional qualification <strong>accountant and cashier expert</strong>',
+	date: '2014-2017'
+}
+
+export const certifications = [
+	{
+		id: 'cer-1',
+		name: 'Responsive Web Design',
+		school: 'freeCodeCamp',
+		img: 'img/education/Screenshot_1.png',
+		link: 'https://www.freecodecamp.org/certification/fccc1dcb7f9-5c49-4fd0-a164-dc8471380155/responsive-web-design',
+		description: '',
+		date: 'November 22, 2022'
+	},
+	{
+		id: 'cer-2',
+		name: 'JavaScript Algorithms and Data Structures',
+		school: 'freeCodeCamp',
+		img: 'img/education/Screenshot_2.png',
+		link: 'https://www.freecodecamp.org/certification/fccc1dcb7f9-5c49-4fd0-a164-dc8471380155/javascript-algorithms-and-data-structures',
+		description: '',
+		date: 'Novemper 3, 2022'
+	},
+	{
+		id: 'cer-3',
+		name: 'Become a JavaScript Developer',
+		school: 'LinkedInLearning',
+		img: 'img/education/Screenshot_12.png',
+		link: 'https://www.linkedin.com/learning/certificates/424fb1b7fbfb2b1831dcd94956c497ed3c85f7ccd20ccf83b05c706afc2627a7',
+		description: 'Learning Path - 28 hours',
+		date: 'October 7, 2023'
+	},
+	{
+		id: 'cer-4',
+		name: 'Became a Full-Stack Web Developer',
+		school: 'LinkedInLearning',
+		img: 'img/education/Screenshot_3.png',
+		link: 'https://www.linkedin.com/learning/certificates/f0348c67876946d0077b25f6a7f7546c990f0becef4148ab47d885c1783d0e63',
+		description: 'Learning Path - 30 hours',
+		date: 'October 24, 2023'
+	},
+	{
+		id: 'cer-5',
+		name: 'Explore React.js Development',
+		school: 'LinkedInLearning',
+		img: 'img/education/Screenshot_4.png',
+		link: 'https://www.linkedin.com/learning/certificates/f0348c67876946d0077b25f6a7f7546c990f0becef4148ab47d885c1783d0e63',
+		description: 'Learning Path - 20 hours 20 minutes',
+		date: 'October 29, 2023'
+	},
+	{
+		id: 'cer-6',
+		name: 'SQL Essential Training',
+		school: 'LinkedInLearning',
+		img: 'img/education/Screenshot_5.png',
+		link: 'https://www.linkedin.com/learning/certificates/f0348c67876946d0077b25f6a7f7546c990f0becef4148ab47d885c1783d0e63',
+		description: 'Course - 4 hours 26 minutes',
+		date: 'October 11, 2023'
 	},
 ]

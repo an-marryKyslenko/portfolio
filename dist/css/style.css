@@ -363,6 +363,105 @@ h6 {
      object-fit: contain;
 }
 
+body::after {
+  content: "";
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  -webkit-transition: opacity 0.8s ease 0s;
+  -o-transition: opacity 0.8s ease 0s;
+  transition: opacity 0.8s ease 0s;
+  pointer-events: none;
+  z-index: 149;
+}
+
+.popup-show body::after {
+  opacity: 1;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  padding: 30px 10px;
+  -webkit-transition: visibility 0.8s ease 0s;
+  -o-transition: visibility 0.8s ease 0s;
+  transition: visibility 0.8s ease 0s;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.popup_show {
+  z-index: 150;
+  visibility: visible;
+  overflow: auto;
+  pointer-events: auto;
+}
+
+.popup_show .popup__content {
+  visibility: visible;
+  -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+          transform: scale(1);
+}
+
+.popup__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  min-height: 100%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  width: 100%;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  align-items: center;
+}
+
+.popup__content {
+  visibility: hidden;
+  -webkit-transform: scale(0);
+      -ms-transform: scale(0);
+          transform: scale(0);
+  -webkit-transition: -webkit-transform 0.3s ease 0s;
+  transition: -webkit-transform 0.3s ease 0s;
+  -o-transition: transform 0.3s ease 0s;
+  transition: transform 0.3s ease 0s;
+  transition: transform 0.3s ease 0s, -webkit-transform 0.3s ease 0s;
+  background-color: #eee;
+  padding: 20px;
+  width: 100%;
+  max-width: 900px;
+  border-radius: 20px;
+}
+
+.lock .popup__content {
+  visibility: visible;
+}
+
+.popup__text img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 .hover-gradient {
   background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0) 70%);
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0) 70%);
@@ -386,6 +485,7 @@ h6 {
   z-index: 1;
 }
 
+.item-ed__title,
 .menu__link:hover,
 .header__logo:hover {
   background: -webkit-gradient(linear, right top, left top, from(#13ADC7), color-stop(66.67%, #6978D1), to(#945DD6));
@@ -1652,6 +1752,65 @@ h6 {
   }
 }
 
+.education__content {
+  margin-bottom: 3.75rem;
+}
+
+.item-ed {
+  margin-bottom: 2.5rem;
+}
+
+.item-ed:last-child {
+  margin-bottom: 0;
+}
+
+.item-ed__content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 30px;
+}
+
+.item-ed__img {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 40%;
+          flex: 0 0 40%;
+  max-height: 250px;
+  cursor: pointer;
+}
+
+.item-ed__img img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+
+.item-ed__info {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  padding: 20px 0;
+}
+
+.item-ed__title {
+  font-size: 1.625rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  cursor: pointer;
+}
+
+.item-ed__description {
+  line-height: 160%;
+}
+
+.item-ed__date {
+  opacity: 0.5;
+  margin-bottom: 1.25rem;
+}
+
 @media (min-width: 75em) {
   .menu__list {
     gap: 5.625rem;
@@ -2035,6 +2194,28 @@ h6 {
     height: 20px;
     left: -85%;
     top: -10%;
+  }
+
+  .item-ed {
+    border-bottom: 1px solid #fff;
+  }
+
+  .item-ed:last-child {
+    border-bottom: none;
+  }
+
+  .item-ed__content {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    gap: 15px;
+  }
+
+  .item-ed__img {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 200px;
+            flex: 0 0 200px;
   }
 }
 
