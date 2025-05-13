@@ -1,27 +1,35 @@
 
 export const techSkills = [
 	{
-		name: 'HTML',
+		name: 'HTML, CSS(SaSS)',
 		level: 'advanced',
 	},
 	{
-		name: 'CSS, SaSS',
+		name: 'JavaScript/TypeScript',
 		level: 'advanced',
 	},
 	{
-		name: 'JavaScript',
+		name: 'React, Redax',
+		level: 'advanced',
+	},
+	{
+		name: 'Node.js/Express',
 		level: 'regular',
 	},
 	{
-		name: 'React',
+		name: 'Fetch, REST API, Web sockets',
 		level: 'regular',
 	},
 	{
-		name: 'NodeJs/ExpressJs',
-		level: 'beginner',
+		name: 'SQL, PostgreSQL, Sequelize',
+		level: 'regular',
 	},
 	{
-		name: 'RESTful API, graphQl, MangoDB',
+		name: 'OOP',
+		level: 'regular',
+	},
+	{
+		name: 'SDLC, Waterfall, Agile concepts (Scrum, Kanban)',
 		level: 'beginner',
 	},
 ]
@@ -29,99 +37,60 @@ export const techSkills = [
 export const projectsList = [
 	{
 		id: 1,
-		name: 'Leaf store',
-		image: '../img/Screenshot_4.png',
-		description: 'In this project I practice with ReactJs, ExpressJs and MongoDB. It must be real web site with products list , filter, bascet and authorizatin. All changes have saved in MongoDB.',
-		link: 'https://leaf-store.vercel.app/',
-		status: 'in process',
-		languages: ['html', 'react', 'css', 'mongodb', 'node', 'javascript'],
-		started: 'Jun, 2023',
-		linkToGit: 'https://github.com/an-marryKyslenko/leaf-store',
+		name: 'MET',
+		image: '../img/met.png',
+		description: 'The MET showcases skills in HTML and CSS. The site was developed using the BEM methodology, which is based on the idea of breaking the user interface into independent and reusable components',
+		link: 'https://an-marrykyslenko.github.io/MET/',
+		languages: ['html', 'css'],
+		started: 'Oct, 2024',
+		linkToGit: 'https://github.com/an-marryKyslenko/MET',
 
 	},
 	{
-		id: 10,
-		name: 'Gostro',
-		status: 'in process',
-		image: '../img/Screenshot_10.png',
-		description: 'Lending page compiled with React, React Router Dom',
-		link: 'https://gostro-knife.vercel.app/',
-		languages: ['html', 'javascript', 'css', 'react'],
-		started: 'Dec, 2023',
-		linkToGit: 'https://github.com/an-marryKyslenko/khife-react-app'
-	},
-	{
-		id: 11,
-		name: 'Vanlife',
-		image: '../img/Screenshot_11.png',
-		description: 'Project was created by React. In this project I tred to practic React Router Dom',
-		link: 'https://vanlife-an-marrykyslenko.vercel.app/',
-		languages: ['html', 'javascript', 'css', 'react'],
-		started: 'Jun, 2023',
-		linkToGit: 'https://github.com/an-marryKyslenko/vanlife?tab=readme-ov-file'
-	},
-	{
 		id: 2,
-		name: 'Food mood',
-		image: '../img/Screenshot_3.png',
-		description: 'Lending page compiled with Gulp',
-		link: 'https://an-marrykyslenko.github.io/foodmood/',
-		languages: ['html', 'javascript', 'css', 'gulp'],
-		started: 'Dec, 2022',
-		linkToGit: 'https://github.com/an-marryKyslenko/foodmood'
+		name: '2048 Game',
+		image: '../img/2048.png',
+		description: 'This project includes an implementation of the classic 2048 game. The game was developed to practice JavaScript programming skills and to enhance proficiency in working with the DOM',
+		link: 'https://an-marrykyslenko.github.io/2048/',
+		languages: ['html', 'css', 'javascript'],
+		started: 'Nov, 2024',
+		linkToGit: 'https://github.com/an-marryKyslenko/2048',
+
 	},
 	{
 		id: 3,
-		name: 'Guitar Store',
-		image: '../img/Screenshot_1.png',
-		description: 'Lending page compiled with Gulp',
-		link: 'https://an-marrykyslenko.github.io/guitar-page/',
-		languages: ['html', 'javascript', 'css', 'gulp'],
-		started: 'Jan, 2023',
-		linkToGit: 'https://github.com/an-marryKyslenko/guitar-page',
+		name: 'Todo app',
+		image: '../img/to-do.png',
+		description: 'This project is a ToDo application built with React and TypeScript. It demonstrates the use of modern React features such as functional components and hooks combined with TypeScript to ensure type safety and improved code maintainability. The app includes features for adding, editing, deleting, and marking tasks as completed, showcasing practical implementations of user interactions and dynamic rendering.',
+		link: 'https://an-marrykyslenko.github.io/to_do/',
+		languages: ['html', 'react', 'css', 'typescript'],
+		started: 'Dec, 2024',
+		linkToGit: 'https://github.com/an-marryKyslenko/to_do',
+
+	},
+	{
+		id: 4,
+		name: 'Nice Gadget',
+		image: '../img/nice-g.png',
+		description: 'Nice Gadget is a modern online shop for tech gadgets, designed to provide a smooth and intuitive user experience. This project showcases the core features of a typical e-commerce application with a focus on clean UI/UX and well-structured code',
+		link: 'https://an-marrykyslenko.github.io/nice_gadget/',
+		languages: ['html', 'react', 'css','typescript'],
+		started: 'Mar, 2025',
+		linkToGit: 'https://github.com/an-marryKyslenko/nice_gadget',
+
 	},
 	{
 		id: 5,
-		name: 'Travellian',
-		image: '../img/Screenshot_5.png',
-		description: 'Lending page compiled with Gulp',
-		link: 'https://an-marrykyslenko.github.io/trave-page/',
-		status: 'in process',
-		languages: ['html', 'css', 'javascript', 'gulp'],
-		linkToGit: 'https://github.com/an-marryKyslenko/trave-page',
-		started: 'Oct, 2022'
+		name: 'Museum NAMU',
+		image: '../img/namu.png',
+		description: 'NAMU showcases skills in HTML and CSS. The site was developed using the BEM methodology, which is based on the idea of breaking the user interface into independent and reusable components.',
+		link: 'https://an-marrykyslenko.github.io/museum-namu/',
+		languages: ['html','css'],
+		started: 'Mar, 2025',
+		linkToGit: 'https://github.com/an-marryKyslenko/museum-namu',
+
 	},
-	{
-		id: 6,
-		name: 'Delivery',
-		image: '../img/Screenshot_6.png',
-		description: 'Lending page compiled with Gulp',
-		link: 'https://an-marrykyslenko.github.io/delivery/',
-		status: 'in process',
-		languages: ['html', 'css', 'javascript', 'gulp'],
-		started: 'Feb, 2023',
-		linkToGit: 'https://github.com/an-marryKyslenko/delivery',
-	},
-	{
-		id: 7,
-		name: 'Jadnoo',
-		image: '../img/Screenshot_7.png',
-		description: 'Lending page compiled with Gulp',
-		link: 'https://an-marrykyslenko.github.io/jaggo/',
-		languages: ['html', 'css', 'javascript', 'gulp'],
-		started: 'Jan, 2023',
-		linkToGit: 'https://github.com/an-marryKyslenko/jaggo'
-	},
-	{
-		id: 8,
-		name: 'NFT',
-		image: '../img/Screenshot_8.png',
-		description: 'Lending page compiled with Gulp',
-		link: 'https://an-marrykyslenko.github.io/nft-page/',
-		languages: ['html', 'javascript', 'css', 'gulp'],
-		started: 'Dec, 2022',
-		linkToGit: 'https://github.com/an-marryKyslenko/nft-page'
-	},
+	
 ]
 export const education = {
 	id: 'ed-1',
@@ -133,6 +102,15 @@ export const education = {
 }
 
 export const certifications = [
+	{
+		id: 'cer-7',
+		name: 'Full Stack Developer',
+		school: 'MateAcademy',
+		img: 'img/education/ma.png',
+		link: 'https://mate.academy/certificates?course=fullstack',
+		description: '',
+		date: 'May 22, 2025'
+	},
 	{
 		id: 'cer-1',
 		name: 'Responsive Web Design',

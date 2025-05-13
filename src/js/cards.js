@@ -69,7 +69,7 @@ function cardHTML(elem) {
 			<div class="card__status ${elem.status ? '_status' : ''}"> In process</div>
 			<h3 class="card__name">${elem.name}</h3>
 			<p class="card__description">${description}${threeDots}</p>
-			<a href=${elem.link} class="card__button shiny-btn">Look it up</a>
+			<a target="_blank" href=${elem.link} class="card__button shiny-btn">Look it up</a>
 		</div>
 	`
 	return cardHTML
