@@ -92,7 +92,7 @@
 		gap: 30px;
 		justify-content: space-between;
 		position: relative;
-		z-index: 2;
+		z-index: 1;
 		@media (max-width:$mobile){
 			flex-direction: column;
 			font-size: rem(14);
