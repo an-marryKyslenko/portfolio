@@ -98,29 +98,19 @@
 }
 
 .technologies__ranges._watcher-view{
-	
-		// .advanced::before{
-		// 	width: 75%;
-		// }
-		// .regular::before{
-		// 	width: 50%;
-		// }
-		// .beginner::before{
-		// 	width: 25%;
-		// }
-		.advanced::before{
-			animation: easeOutAdvanced 1.5s ease-in 1 normal running 0.2s ;
-			width: 75%;
-		}
-		.regular::before{
-			animation: easeOutRegular 1.5s ease-in 1 normal running 0.5s ;
-			width: 50%;
+	.advanced::before{
+		animation: easeOutAdvanced 1.5s ease-in 1 normal running 0.2s ;
+		width: 75%;
+	}
+	.regular::before{
+		animation: easeOutRegular 1.5s ease-in 1 normal running 0.5s ;
+		width: 50%;
 
-		}
-		.beginner::before{
-			animation: easeOutBeginner 1.2s ease-in 1 normal running 0.7s ;
-			width: 25%;
-		}
+	}
+	.beginner::before{
+		animation: easeOutBeginner 1.2s ease-in 1 normal running 0.7s ;
+		width: 25%;
+	}
 	
 
 }
