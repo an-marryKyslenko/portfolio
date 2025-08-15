@@ -36,6 +36,16 @@ export const techSkills = [
 
 export const projectsList = [
 	{
+		id: 6,
+		name: 'FlavorAI ',
+		image: '../img/FlavorAI.png',
+		description: 'This is the client-side of the FlavorAI recipe app, built with Next.js 15 and fully integrated with cookie-based authentication via SSR and client components. Users can view recipes, leave comments, and interact securely with the backend. Also it has server-side which was built on Nest.js',
+		link: 'https://flavorai.vercel.app/',
+		languages: ['html', 'css', 'next', 'typescript', 'node', 'mysql'],
+		started: 'July, 2025',
+		linkToGit: 'https://github.com/an-marryKyslenko/FlavorAI_front-end',
+	},
+	{
 		id: 1,
 		name: 'MET',
 		image: '../img/met.png',
@@ -55,7 +65,6 @@ export const projectsList = [
 		languages: ['html', 'css', 'javascript'],
 		started: 'Nov, 2024',
 		linkToGit: 'https://github.com/an-marryKyslenko/2048',
-
 	},
 	{
 		id: 3,
